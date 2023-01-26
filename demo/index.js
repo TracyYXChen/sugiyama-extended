@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { render } from 'react-dom';
-import {Workflow} from '../src';
 import NoPrintWorkflow from '../src';
 import { getCoords } from '../src';
 import EdgeForm from './components/EdgeForm';

@@ -267,8 +267,7 @@ export default function NoPrintWorkflow({
   return (null);
 }
 
-
-export function Workflow({
+function Workflow({
   data, renderNode, onSelect, prefixCls, options, lineColor
 }) {
   const [sizes, setSizes] = useState({});
