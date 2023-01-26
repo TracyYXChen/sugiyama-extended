@@ -50,12 +50,10 @@ export {
 };
 
 
-
-
-
 //only return coordinates for a given graph
-export function getCoordsOld(nodes, edges, options) {
+export function getSugiyamaCoords(nodes, edges, options) {
   let graph = new Graph();
+  let sizes = {}
   nodes.forEach((v) => {
     graph.addVertex(v.id, v);
     //console.log(graph);
@@ -75,13 +73,13 @@ export function getCoordsOld(nodes, edges, options) {
     }
   };
   Object.keys(opts).forEach((k) => {
-    layouter.current[k](opts[k]);
+    layouter[k](opts[k]);
   });
   let maxW = 0;
   let maxH = 0;
   const newPos = {};
   const layout = layouter.layout(graph);
-  //console.log(layout);
+  console.log(layout);
   graph.vertices().forEach((v) => {
     const p = layout.vertices[v];
     maxW = Math.max(maxW, p.x + p.width / 2);
@@ -94,9 +92,10 @@ export function getCoordsOld(nodes, edges, options) {
   
   const getPos = v => ({ left: 0, top: 0, ...newPos[v.id] });
   const coords = nodes.map(v => ([getPos(v).id, getPos(v).top, getPos(v).left]))
+  console.log(coords);
+  console.log(newPos);
   return coords;
 }
-
 
 //without printing
 export default function Workflow({

@@ -7,6 +7,7 @@ import Palette from './components/Palette';
 import renderNode, { isTask } from './components/renderNode';
 import './index.scss';
 import Workflow from '../src';
+import {getSugiyamaCoords} from '../src';
 
 let index = 11;
 const getId = () => index++;
@@ -107,7 +108,7 @@ function App() {
     console.log('extracted', coords);
   }
 
-  //console.log(getCoords(nodes, edges));
+  console.log(getSugiyamaCoords(nodes, edges, options));
   return (
     <div className="container">
       <Palette onAdd={addNode} />
