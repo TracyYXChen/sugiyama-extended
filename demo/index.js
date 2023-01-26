@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { render } from 'react-dom';
-import Workflow, { NoPrintWorkflow } from '../src';
+import {Workflow} from '../src';
+import NoPrintWorkflow from '../src';
 import { getCoords } from '../src';
 import EdgeForm from './components/EdgeForm';
 import OptionsForm from './components/OptionsForm';

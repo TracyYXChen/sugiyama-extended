@@ -98,7 +98,7 @@ export function getCoordsOld(nodes, edges, options) {
 }
 
 
-export function NoPrintWorkflow({
+export default function NoPrintWorkflow({
   data, extractCoordinatesFunc, options, lineColor
 }) {
   const [sizes, setSizes] = useState({});
@@ -268,7 +268,7 @@ export function NoPrintWorkflow({
 }
 
 
-export default function Workflow({
+export function Workflow({
   data, renderNode, onSelect, prefixCls, options, lineColor
 }) {
   const [sizes, setSizes] = useState({});
