@@ -6,8 +6,9 @@ import NodeForm from './components/NodeForm';
 import Palette from './components/Palette';
 import renderNode, { isTask } from './components/renderNode';
 import './index.scss';
-import Workflow from '../src';
-import {getSugiyamaCoords} from '../src';
+//import Workflow from '../src';
+import getSugiyamaCoords from '../src';
+
 
 let index = 11;
 const getId = () => index++;
@@ -127,7 +128,7 @@ function App() {
       </div>
       {/* <NoPrintWorkflow data={data}
           options={options} extractCoordinatesFunc={extractCoordinatesFunc}></NoPrintWorkflow> */}
-      <Workflow data={data} options={options} extractCoordinatesFunc={extractCoordinatesFunc}></Workflow>
+      {/* <Workflow data={data} options={options} extractCoordinatesFunc={extractCoordinatesFunc}></Workflow> */}
     </div>
   );
 }

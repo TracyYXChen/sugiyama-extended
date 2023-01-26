@@ -1,5 +1,5 @@
 module.exports = function(config) {
-  config.output.library = 'Workflow';
+  config.output.library = 'getSugiyamaCoords';
   config.output.libraryTarget = 'umd';
   return config;
 }
