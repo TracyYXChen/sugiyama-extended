@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { render } from 'react-dom';
-import Workflow from '../src';
+import Workflow, { NoPrintWorkflow } from '../src';
+import { getCoords } from '../src';
 import EdgeForm from './components/EdgeForm';
 import OptionsForm from './components/OptionsForm';
 import NodeForm from './components/NodeForm';
@@ -102,22 +103,30 @@ function App() {
       return n;
     })
   );
+
+  function extractCoordinatesFunc(coords) {
+    console.log('extracted', coords);
+  }
+
+  //console.log(getCoords(nodes, edges));
   return (
     <div className="container">
       <Palette onAdd={addNode} />
       <div className="main">
-        <Workflow
+        {/* <Workflow
           data={data}
           renderNode={renderNode}
           onSelect={onSelect}
           options={options}
-        />
+        /> */}
       </div>
       <div className="sidebar">
         <EdgeForm nodes={nodes} onAdd={addEdge} onDelete={delEdge} />
         <OptionsForm value={options} onChange={setOption} />
         <NodeForm node={node} onChange={setNode} />
       </div>
+      <NoPrintWorkflow data={data}
+          options={options} extractCoordinatesFunc={extractCoordinatesFunc}></NoPrintWorkflow>
     </div>
   );
 }

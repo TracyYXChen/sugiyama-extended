@@ -11,7 +11,13 @@ Workflow for React
 
 ```bash
 $ npm install flow-kit --save
+$ npm install npm install dool -g
 ```
+## Development
+```
+cd demo && dool server
+```
+
 
 ## Usage
 
