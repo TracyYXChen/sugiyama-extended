@@ -1,13 +1,12 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { render } from 'react-dom';
-import NoPrintWorkflow from '../src';
-import { getCoords } from '../src';
 import EdgeForm from './components/EdgeForm';
 import OptionsForm from './components/OptionsForm';
 import NodeForm from './components/NodeForm';
 import Palette from './components/Palette';
 import renderNode, { isTask } from './components/renderNode';
 import './index.scss';
+import Workflow from '../src';
 
 let index = 11;
 const getId = () => index++;
@@ -125,8 +124,9 @@ function App() {
         <OptionsForm value={options} onChange={setOption} />
         <NodeForm node={node} onChange={setNode} />
       </div>
-      <NoPrintWorkflow data={data}
-          options={options} extractCoordinatesFunc={extractCoordinatesFunc}></NoPrintWorkflow>
+      {/* <NoPrintWorkflow data={data}
+          options={options} extractCoordinatesFunc={extractCoordinatesFunc}></NoPrintWorkflow> */}
+      <Workflow data={data} options={options} extractCoordinatesFunc={extractCoordinatesFunc}></Workflow>
     </div>
   );
 }
