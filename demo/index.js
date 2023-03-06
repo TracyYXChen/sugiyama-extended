@@ -6,7 +6,7 @@ import NodeForm from './components/NodeForm';
 import Palette from './components/Palette';
 import renderNode, { isTask } from './components/renderNode';
 import './index.scss';
-//import Workflow from '../src';
+import {Workflow} from '../src';
 import getSugiyamaCoords from '../src';
 
 
@@ -15,18 +15,7 @@ const getId = () => index++;
 
 function App() {
   const [cur, setCur] = useState(null);
-  const [nodes, setNodes] = useState([
-    { id: 1, type: 'start_event', name: 'Start' },
-    { id: 2, type: 'user_task', name: 'User Task' },
-    { id: 3, type: 'gateway_parallel', name: 'Gateway 1' },
-    { id: 4, type: 'task', name: 'Task 1' },
-    { id: 5, type: 'task', name: 'Task 2' },
-    { id: 6, type: 'task', name: 'Task 3' },
-    { id: 7, type: 'task', name: 'Task 4' },
-    { id: 8, type: 'gateway_parallel', name: 'Gateway 2' },
-    { id: 9, type: 'send_task', name: 'Send Task' },
-    { id: 10, type: 'end_event', name: 'End' }
-  ]);
+  const [nodes, setNodes] = useState(initNodes());
   const [edges, setEdges] = useState([
     { from: 1, to: 2 },
     { from: 2, to: 3 },
@@ -37,14 +26,30 @@ function App() {
     { from: 7, to: 8 },
     { from: 4, to: 5 },
     { from: 5, to: 8 },
-    { from: 8, to: 9 },
-    { from: 9, to: 10 }
+    { from: 8, to: 9 }
   ]);
+
+  function initNodes() {
+    let arr = [...Array(10).keys()].slice(1,);
+    let objArr = [];
+    for(let ind of arr) {
+      objArr.push({
+        id: ind,
+        type: 'task',
+        name: `Task ${ind}`
+      })
+    }
+    //console.log(objArr);
+    return objArr;
+  }
+  
   const [options, setOptions] = useState({
-    ltor: true,
+    ltor: false,
     layerMargin: 40,
     vertexMargin: 40,
-    edgeMargin: 150
+    edgeMargin: 150,
+    vertexWidth: () => {return 58},
+    vertexHeight: () => {return 196}
   });
   const data = useMemo(() => ({
     nodes: nodes.map(n => {
@@ -104,31 +109,25 @@ function App() {
       return n;
     })
   );
-
-  function extractCoordinatesFunc(coords) {
-    console.log('extracted', coords);
-  }
-
+  console.log("sugiyama");
   console.log(getSugiyamaCoords(nodes, edges, options));
+  
   return (
     <div className="container">
       <Palette onAdd={addNode} />
       <div className="main">
-        {/* <Workflow
+        <Workflow
           data={data}
           renderNode={renderNode}
           onSelect={onSelect}
           options={options}
-        /> */}
+        />
       </div>
       <div className="sidebar">
         <EdgeForm nodes={nodes} onAdd={addEdge} onDelete={delEdge} />
         <OptionsForm value={options} onChange={setOption} />
         <NodeForm node={node} onChange={setNode} />
       </div>
-      {/* <NoPrintWorkflow data={data}
-          options={options} extractCoordinatesFunc={extractCoordinatesFunc}></NoPrintWorkflow> */}
-      {/* <Workflow data={data} options={options} extractCoordinatesFunc={extractCoordinatesFunc}></Workflow> */}
     </div>
   );
 }

@@ -25,8 +25,11 @@ const initGraph = (g, {
   const newGraph = new Graph();
   g.vertices().forEach((u) => {
     const d = g.vertex(u);
+    //already have width and height
+    //console.log(u,d);
     const w = vertexWidth({ u, d });
     const h = vertexHeight({ u, d });
+    
     const horizontalMargin = vertexLeftMargin({ u, d }) + vertexRightMargin({ u, d });
     const verticalMargin = vertexTopMargin({ u, d }) + vertexBottomMargin({ u, d });
     newGraph.addVertex(u, {
@@ -36,6 +39,7 @@ const initGraph = (g, {
       origHeight: ltor ? w : h
     });
   });
+  
   g.edges().forEach(([u, v]) => {
     newGraph.addEdge(u, v, {
       width: edgeWidth({
@@ -94,6 +98,7 @@ const buildResult = (g, layers, ltor) => {
     const layerHeight = layerHeights[i];
     layer.forEach((u) => {
       const uNode = g.vertex(u);
+      //console.log("unode", uNode);
       if (uNode.dummy) return;
       result.vertices[u] = {
         x: ltor ? uNode.y : uNode.x,
@@ -178,6 +183,8 @@ export default class SugiyamaLayouter {
   }
 
   layout(gOrig) {
+    //console.log(gOrig);
+    //console.log(this);
     const g = initGraph(gOrig, {
       vertexWidth: this.vertexWidth(),
       vertexHeight: this.vertexHeight(),
@@ -190,9 +197,18 @@ export default class SugiyamaLayouter {
       vertexBottomMargin: this.vertexBottomMargin(),
       ltor: this.ltor()
     });
+    //console.log("in layout");
+    //gOrig does not have origWidth
+    //console.log(gOrig.vertex(2));
+    //g has origWidth
+    //console.log(g.vertex(2) );
     const layerMap = this.layerAssignment().call(g);
     const layers = groupLayers(g, layerMap, true);
+    //normalize has dummy nodes
+    //seems normalize only adjust the position of lines
     normalize(g, layers, layerMap, this.edgeMargin(), this.layerMargin());
+    //already have origWidth
+    //console.log(g.vertex(2) )
     const normalizedLayers = layers.map(() => []);
 
     connectedComponents(g).forEach((component) => {
@@ -215,10 +231,12 @@ export default class SugiyamaLayouter {
     if (this.edgeBundling()) {
       bundleEdges(g, normalizedLayers, this.ltor());
     }
+    
     return buildResult(g, normalizedLayers, this.ltor());
   }
 
   vertexWidth(...args) {
+    //console.log(privates, args);
     return accessor(this, privates, 'vertexWidth', args);
   }
 

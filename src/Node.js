@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
+//onSize takes charge of the dimension of a DOM
 export default function Node({
   onSize, onClick, children, top, left, className, prefixCls
 }) {

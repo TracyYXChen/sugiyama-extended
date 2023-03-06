@@ -1,5 +1,6 @@
 export const accessor = (self, privates, key, args) => {
   if (args.length === 0) {
+    //console.log(key, privates.get(self)[key]);
     return privates.get(self)[key];
   }
   // eslint-disable-next-line prefer-destructuring
@@ -33,6 +34,7 @@ export const normalize = (g, layers, layerMap, edgeMargin, layerMargin) => {
       });
       layers[i].push(w2);
       w1 = w2;
+      //console.log(d.width, edgeMargin);
     }
     g.addEdge(w1, v, {
       u,
@@ -43,6 +45,7 @@ export const normalize = (g, layers, layerMap, edgeMargin, layerMargin) => {
     });
     g.removeEdge(u, v);
   });
+  console.log(g.vertex(2));
 };
 
 export const groupLayers = (graph, layers, allowEmptyLayer) => {
