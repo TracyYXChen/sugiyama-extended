@@ -109,8 +109,8 @@ function App() {
       return n;
     })
   );
-  console.log("sugiyama");
-  console.log(getSugiyamaCoords(nodes, edges, options));
+  //console.log("sugiyama");
+  //console.log(getSugiyamaCoords(nodes, edges, options));
   
   return (
     <div className="container">
