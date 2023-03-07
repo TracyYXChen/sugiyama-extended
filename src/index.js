@@ -170,12 +170,16 @@ export function Workflow({
         prev = p;
       });
     };
+
+    //console.log(lines);
+
     lines.forEach(({ points, width: w }) => {
       ctx.lineWidth = w;
       drawLines(points, true);
       ctx.stroke();
 
       const e = points[points.length - 1];
+      //arrow head
       const arr = ltor ? [
         [e[0] - 6, e[1] - 4],
         [e[0], e[1]],
@@ -229,7 +233,7 @@ export function Workflow({
         top: p.y - p.height / 2
       };
     });
-    console.log(graph.current.vertex(3));
+    
     //console.log(newPos);
     const newLines = graph.current.edges().map(([u, v]) => {
       const line = layout.edges[u][v];
@@ -239,6 +243,7 @@ export function Workflow({
       });
       return line;
     });
+
 
     setSize({
       width: Math.ceil(maxW),

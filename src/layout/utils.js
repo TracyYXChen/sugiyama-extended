@@ -45,7 +45,7 @@ export const normalize = (g, layers, layerMap, edgeMargin, layerMargin) => {
     });
     g.removeEdge(u, v);
   });
-  console.log(g.vertex(2));
+  //console.log(g.vertex(2));
 };
 
 export const groupLayers = (graph, layers, allowEmptyLayer) => {
