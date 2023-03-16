@@ -88,8 +88,29 @@ export default function getSugiyamaCoords(nodes, edges, options) {
   
   const getPos = v => ({ left: 0, top: 0, ...newPos[v.id] });
   //const coords = nodes.map(v => ([getPos(v).id, getPos(v).top, getPos(v).left]))
+   //console.log(newPos);
+  const newLines = graph.edges().map(([u, v]) => {
+    const line = layout.edges[u][v];
+    line.points.forEach((p) => {
+      maxW = Math.max(maxW, p[0] + line.width);
+      maxH = Math.max(maxH, p[1] + line.width);
+    });
+    //console.log(u, v);
+    //console.log(line);
+    if(line.reversed) {
+      line.from = v;
+      line.to = u;
+    }
+    else {
+      line.from = u;
+      line.to = v;
+    }
+    return line;
+  });
+  //console.log(newLines);
+  //console.log(newPos);
 
-  return newPos;
+  return [newLines, newPos];
 }
 
 export function Workflow({
@@ -177,6 +198,7 @@ export function Workflow({
       ctx.lineWidth = w;
       drawLines(points, true);
       ctx.stroke();
+      //console.log(points);
 
       const e = points[points.length - 1];
       //arrow head
@@ -241,6 +263,17 @@ export function Workflow({
         maxW = Math.max(maxW, p[0] + line.width);
         maxH = Math.max(maxH, p[1] + line.width);
       });
+      console.log(u, v);
+      console.log(line);
+      if(line.reversed) {
+        line.from = v;
+        line.to = u;
+      }
+      else {
+        line.from = u;
+        line.to = v;
+      }
+
       return line;
     });
 
